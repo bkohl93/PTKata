@@ -17,7 +17,7 @@ std::string arabicToRoman(int n)
   {
     while (n > 0)
     {
-      if (n < 5 && n != 4)
+      if (n < 4)
       {
         str += "I";
 	n--;
@@ -27,10 +27,20 @@ std::string arabicToRoman(int n)
 	str = "IV";
 	n = n - 4;
       }
-      else
+      else if (n < 9)
       {
 	str += "V";
 	n = n - 5;
+      }
+      else if (n == 9)
+      {
+        str = "IX";
+        n = n - 9;
+      }
+      else if (n < 14)
+      {
+        str += "X";
+        n = n - 10;
       }
     }
   }
@@ -56,7 +66,12 @@ int main()
   arabicToRoman(5) == "V" &&
   arabicToRoman(6) == "VI" &&
   arabicToRoman(7) == "VII" &&
-  arabicToRoman(8) == "VIII"
+  arabicToRoman(8) == "VIII" &&
+  arabicToRoman(9) == "IX" &&
+  arabicToRoman(10) == "X" &&
+  arabicToRoman(11) == "XI" &&
+  arabicToRoman(12) == "XII" &&
+  arabicToRoman(13) == "XIII"
   ) ? std::cout << "passed" : std::cout << "failed";
 
 

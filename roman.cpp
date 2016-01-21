@@ -15,9 +15,23 @@ std::string arabicToRoman(int n)
   }
   else
   {
-    for (int i = 0; i < n; i++)
+    while (n > 0)
     {
-      str += "I";
+      if (n < 5 && n != 4)
+      {
+        str += "I";
+	n--;
+      }
+      else if (n == 4)
+      {
+	str = "IV";
+	n = n - 4;
+      }
+      else
+      {
+	str += "V";
+	n = n - 5;
+      }
     }
   }
   
@@ -37,7 +51,12 @@ int main()
   arabicToRoman(1) == "I" &&
   arabicToRoman(4000) == "No roman numeral representation of integers greater than 3,999 exist." &&
   arabicToRoman(2) == "II" &&
-  arabicToRoman(3) == "III"
+  arabicToRoman(3) == "III" &&
+  arabicToRoman(4) == "IV" &&
+  arabicToRoman(5) == "V" &&
+  arabicToRoman(6) == "VI" &&
+  arabicToRoman(7) == "VII" &&
+  arabicToRoman(8) == "VIII"
   ) ? std::cout << "passed" : std::cout << "failed";
 
 

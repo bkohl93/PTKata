@@ -3,7 +3,7 @@
 // takes an arabic integer and returns its roman numeral representation
 std::string arabicToRoman(int n)
 {
-  std::string str = "I";
+  std::string str = "";
 
   if (n < 1)
   {
@@ -12,6 +12,13 @@ std::string arabicToRoman(int n)
   else if (n > 3999)
   {
     str = "No roman numeral representation of integers greater than 3,999 exist.";
+  }
+  else
+  {
+    for (int i = 0; i < n; i++)
+    {
+      str += "I";
+    }
   }
   
   return str;
@@ -28,7 +35,9 @@ int main()
   (arabicToRoman(0) == "No roman numeral representation of integers less than one exist." &&
   arabicToRoman(-1) == "No roman numeral representation of integers less than one exist." &&
   arabicToRoman(1) == "I" &&
-  arabicToRoman(4000) == "No roman numeral representation of integers greater than 3,999 exist."
+  arabicToRoman(4000) == "No roman numeral representation of integers greater than 3,999 exist." &&
+  arabicToRoman(2) == "II" &&
+  arabicToRoman(3) == "III"
   ) ? std::cout << "passed" : std::cout << "failed";
 
 

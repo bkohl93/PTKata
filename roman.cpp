@@ -4,12 +4,16 @@
 std::string arabicToRoman(int n)
 {
   std::string str = "";
+  int index = 0;
 
-  if (n < 1)
+  std::string roman [5] = {"X", "IX", "V", "IV", "I"};
+  int arabic [5] = {10, 9, 5, 4, 1};
+
+  if (n < 1) //check that n is not zero or negative
   {
     str = "No roman numeral representation of integers less than one exist.";
   }
-  else if (n > 3999)
+  else if (n > 3999) //check that n is within the range of valid roman numerals
   {
     str = "No roman numeral representation of integers greater than 3,999 exist.";
   }
@@ -17,30 +21,14 @@ std::string arabicToRoman(int n)
   {
     while (n > 0)
     {
-      if (n < 4)
+      if (n < arabic[index]) //if n is too small, try the next number in the array
       {
-        str += "I";
-	n--;
+	index++;
       }
-      else if (n == 4)
+      else //otherwise, subtract the largest possible value and concatenate str with its roman numerals 
       {
-	str = "IV";
-	n = n - 4;
-      }
-      else if (n < 9)
-      {
-	str += "V";
-	n = n - 5;
-      }
-      else if (n == 9)
-      {
-        str = "IX";
-        n = n - 9;
-      }
-      else if (n < 14)
-      {
-        str += "X";
-        n = n - 10;
+        str += roman[index];
+        n -= arabic[index];
       }
     }
   }
@@ -73,7 +61,6 @@ int main()
   arabicToRoman(12) == "XII" &&
   arabicToRoman(13) == "XIII"
   ) ? std::cout << "passed" : std::cout << "failed";
-
 
   std::cout << std::endl;
   return 0;

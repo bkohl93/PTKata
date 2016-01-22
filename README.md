@@ -8,7 +8,9 @@ Date: 1/22/16
 USAGE:
 
 compile with: 	g++ roman.cpp testCases.cpp
+
 run with: 	./a.out
+
 test with: 	./a.out < numbers.txt | diff numerals.txt - 
 
 testCases.cpp can be run by uncommenting the function call in roman.cpp

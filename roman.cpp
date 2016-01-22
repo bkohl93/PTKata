@@ -53,6 +53,26 @@ int romanToArabic(std::string s)
     {
       numbers[i] = 5;
     }
+    else if (s[i] == 'X')
+    {
+      numbers[i] = 10;
+    }
+    else if (s[i] == 'L')
+    {
+      numbers[i] = 50;
+    }
+    else if (s[i] == 'C')
+    {
+      numbers[i] = 100;
+    }
+    else if (s[i] == 'D')
+    {
+      numbers[i] = 500;
+    }
+    else if (s[i] == 'M')
+    {
+      numbers[i] = 1000;
+    }
   }
 
   for (int i = 0; i < len-1; i++)
@@ -108,10 +128,26 @@ int main()
   romanToArabic("III") == 3 &&
   romanToArabic("IV") == 4 &&
   romanToArabic("V") == 5 &&
-  romanToArabic("VI") == 6
+  romanToArabic("VI") == 6 &&
+  romanToArabic("VII") == 7 &&
+  romanToArabic("VIII") == 8 &&
+  romanToArabic("IX") == 9 &&
+  romanToArabic("X") == 10 &&
+  romanToArabic("XI") == 11 &&
+  romanToArabic("XII") == 12 &&
+  romanToArabic("XIII") == 13 &&
+  romanToArabic("XC") == 90 &&
+  romanToArabic("C") == 100 &&
+  romanToArabic("CX") == 110 &&
+  romanToArabic("CXCIX") == 199 &&
+  romanToArabic("CC") == 200 &&
+  romanToArabic("CMXCIX") == 999 &&
+  romanToArabic("MCMXCIX") == 1999 &&
+  romanToArabic("MM") == 2000 &&
+  romanToArabic("MMI") == 2001 &&
+  romanToArabic("MMMCMXCIX") == 3999
   ) ? std::cout << "passed" : std::cout << "failed";
   std::cout << std::endl;
-
 
   return 0;
 }

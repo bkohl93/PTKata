@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 // takes an arabic integer and returns its roman numeral representation
 std::string arabicToRoman(int n)
@@ -39,7 +40,36 @@ std::string arabicToRoman(int n)
 //takes a string of roman numerals and returns its arabic integer representation
 int romanToArabic(std::string s)
 {
-  return s.length();
+  int num = 0, len = s.length();
+  std::vector<int> numbers(len);
+
+  for (int i = 0; i < len; i++)
+  {
+    if (s[i] == 'I')
+    {
+      numbers[i] = 1;	//put the corresponding arabic number in the number array
+    }
+    else if (s[i] == 'V')
+    {
+      numbers[i] = 5;
+    }
+  }
+
+  for (int i = 0; i < len-1; i++)
+  {
+    if (numbers[i] < numbers[i+1]) //if a smaller integer precedes a larger one, it is subtracted
+    {
+      num -= numbers[i];
+    }
+    else
+    {
+      num += numbers[i];
+    }
+  }
+
+  num += numbers[len-1];
+
+  return num;
 }
 
 int main()
@@ -75,7 +105,10 @@ int main()
 
   (romanToArabic("I") == 1 &&
   romanToArabic("II") == 2 &&
-  romanToArabic("III") == 3
+  romanToArabic("III") == 3 &&
+  romanToArabic("IV") == 4 &&
+  romanToArabic("V") == 5 &&
+  romanToArabic("VI") == 6
   ) ? std::cout << "passed" : std::cout << "failed";
   std::cout << std::endl;
 

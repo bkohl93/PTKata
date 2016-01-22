@@ -39,7 +39,7 @@ std::string arabicToRoman(int n)
 //takes a string of roman numerals and returns its arabic integer representation
 int romanToArabic(std::string s)
 {
-  return 0;
+  return 1;
 }
 
 int main()
@@ -71,7 +71,12 @@ int main()
   arabicToRoman(2001) == "MMI" &&
   arabicToRoman(3999) == "MMMCMXCIX"
   ) ? std::cout << "passed" : std::cout << "failed";
-
   std::cout << std::endl;
+
+  (romanToArabic("I") == 1
+  ) ? std::cout << "passed" : std::cout << "failed";
+  std::cout << std::endl;
+
+
   return 0;
 }

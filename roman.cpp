@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <stdlib.h>
 
 // takes an arabic integer and returns its roman numeral representation
 std::string arabicToRoman(int n)
@@ -92,7 +93,8 @@ int romanToArabic(std::string s)
   return num;
 }
 
-int main()
+
+void testCases()
 {
   (arabicToRoman(0) == "No roman numeral representation of integers less than one exist." &&
   arabicToRoman(-1) == "No roman numeral representation of integers less than one exist." &&
@@ -114,7 +116,7 @@ int main()
   arabicToRoman(100) == "C" &&
   arabicToRoman(110) == "CX" &&
   arabicToRoman(199) == "CXCIX" &&
-  arabicToRoman(200) == "CC" && 
+  arabicToRoman(200) == "CC" &&
   arabicToRoman(999) == "CMXCIX" &&
   arabicToRoman(1999) == "MCMXCIX" &&
   arabicToRoman(2000) == "MM" &&
@@ -123,7 +125,7 @@ int main()
   ) ? std::cout << "passed" : std::cout << "failed";
   std::cout << std::endl;
 
-  (romanToArabic("I") == 1 &&
+ (romanToArabic("I") == 1 &&
   romanToArabic("II") == 2 &&
   romanToArabic("III") == 3 &&
   romanToArabic("IV") == 4 &&
@@ -160,8 +162,77 @@ int main()
   }
 
   (allTestsPassed) ? std::cout << "Passed" << std::endl : std::cout << "Failed" << std::endl;
+}
 
 
+void validate(std::string str)
+{
+  int len = str.length();
+  bool isAString = true;
+  bool isANumber = true;
+
+  if (len > 0)
+  {
+    if (len < 5 && str[0] != 0) //check that the string is not too large an integer, nor has a leading zero
+    {
+      for (int i = 0; i < len; i++)
+      {
+        if (str[i] < '0' || str[i] > '9') //make sure all of the characters in the string are numbers
+        {
+          isANumber = false;
+        }
+      }
+    }
+    else
+    {
+      isANumber = false;
+    }
+
+    if (isANumber)
+    {
+      std::cout << str << " is " << arabicToRoman(atoi(str.c_str())) << std::endl;
+    }
+    else
+    {
+      for (int i = 0; i < len; i++)
+      {
+        if (str[i] != 'I' && str[i] != 'V' && str[i] != 'X' && str[i] != 'L' && str[i] != 'C' && str[i] != 'D' && str[i] != 'M')
+        {
+          isAString = false;
+        }
+      }
+
+      for (int i = 0; i < len-2; i++)
+      {
+        if (str[i] == str[i+1] && str[i] == str[i+2]) //check that three occurences of one letter don't appear in a row
+        {
+          isAString = false;
+        }
+      }
+
+      if (isAString)
+      {
+        std::cout << str << " is " << romanToArabic(str) << std::endl;
+      }
+      else
+      {
+        std::cout << "This input is not valid." << std::endl;
+      }
+    }
+  }
+}
+
+
+int main()
+{
+  std::string str;
+
+  std::cout << "Please enter an arabic number to convert to roman numerals, or vice-versa." << std::endl; 
+  std::cin >> str;
+
+  validate(str);
+
+ // testCases();
 
   return 0;
 }

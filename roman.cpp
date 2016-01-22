@@ -83,10 +83,9 @@ int romanToArabic(std::string s)
 }
 
 
-void validate(std::string str)
+bool validateNumber(std::string str)
 {
   int len = str.length();
-  bool isAString = true;
   bool isANumber = true;
 
   if (len > 0)				 //check for empty string
@@ -110,44 +109,48 @@ void validate(std::string str)
     {
       int n = atoi(str.c_str());
 
-      if (n < 1)	 //check that n is not zero or negative
+      if (n < 1 || n > 3999)	 //check that n is not zero, negative, or greater than 3999
       {
-        str = "No roman numeral representation of integers less than one exists.";
-      }
-      else if (n > 3999) //check that n is within the range of valid roman numerals
-      {
-        str = "No roman numeral representation of integers greater than 3,999 exists.";
-      }
-      else
-      {
-        std::cout << str << " is " << arabicToRoman(n) << std::endl;
-      }
-    }
-    else		 //in the case that we're given a string...
-    {
-      for (int i = 0; i < len; i++)
-      {
-        if (str[i] != 'I' && str[i] != 'V' && str[i] != 'X' && str[i] != 'L' && str[i] != 'C' && str[i] != 'D' && str[i] != 'M')
-        {
-          isAString = false; //check that the string only contains roman numerals
-        }
-      }
-      
-      if (str != arabicToRoman(romanToArabic(str)))
-      {
-        isAString = false; //guarantees that the roman numerals are not improperly formatted
-      }
-
-      if (isAString)
-      {
-        std::cout << str << " is " << romanToArabic(str) << std::endl;
-      }
-      else
-      {
-        std::cout << "This input is not valid." << std::endl; //if it's not a number or roman numerals, input is invalid
+        std::cout <<  "No roman numeral representation of integers less than 1 or greater than 3,999 exists." << std::endl;
+        isANumber = false;
       }
     }
   }
+  else
+  {
+    isANumber = false;
+  }
+
+  return isANumber;
+}
+
+
+bool validateString(std::string str)
+{
+  int len = str.length();
+  bool isAString = true;
+ 
+  if (len > 0)
+  {
+    for (int i = 0; i < len; i++)
+    {
+      if (str[i] != 'I' && str[i] != 'V' && str[i] != 'X' && str[i] != 'L' && str[i] != 'C' && str[i] != 'D' && str[i] != 'M')
+      {
+        isAString = false; //check that the string only contains roman numerals
+      }
+    }
+      
+    if (str != arabicToRoman(romanToArabic(str)))
+    {
+      isAString = false; //guarantees that the roman numerals are not improperly formatted
+    }
+  }
+  else
+  {
+    isAString = false;
+  }
+
+  return isAString; 
 }
 
 
@@ -155,10 +158,26 @@ int main()
 {
   std::string str;
 
-  std::cout << "Please enter an arabic number to convert to roman numerals, or vice-versa." << std::endl; 
+  std::cout << "Please enter an arabic number to convert to roman numerals, or vice-versa, or enter 0 to exit." << std::endl; 
   std::cin >> str;
 
-  validate(str);
+  while (str != "0")
+  {
+    if (validateNumber(str))
+    {
+      std::cout << str << " is " << arabicToRoman(atoi(str.c_str())) << std::endl;
+    }
+    else if (validateString(str))
+    {
+      std::cout << str << " is " << romanToArabic(str) << std::endl;
+    }
+    else
+    {
+      std::cout << "This input is not valid." << std::endl;  
+    }
+    std::cout << "Please enter an arabic number to convert to roman numerals, or vice-versa, or enter 0 to exit." << std::endl;
+    std::cin >> str;
+  }
 
  // testCases();
 

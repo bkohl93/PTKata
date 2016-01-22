@@ -90,7 +90,7 @@ bool validateNumber(std::string str)
 
   if (len > 0)				 //check for empty string
   {
-    if (len < 5 && str[0] != 0)		 //check that the string is not too large an integer, nor has a leading zero
+    if (len < 5 && str[0] != '0')	 //check that the string is not too large an integer, nor has a leading zero
     {
       for (int i = 0; i < len; i++)
       {

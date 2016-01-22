@@ -149,5 +149,19 @@ int main()
   ) ? std::cout << "passed" : std::cout << "failed";
   std::cout << std::endl;
 
+  bool allTestsPassed = true;
+
+  for (int i = 1; i < 4000; i++)
+  {
+    if (romanToArabic(arabicToRoman(i)) != i)
+    {
+      allTestsPassed = false;
+    }
+  }
+
+  (allTestsPassed) ? std::cout << "Passed" << std::endl : std::cout << "Failed" << std::endl;
+
+
+
   return 0;
 }

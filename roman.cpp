@@ -82,7 +82,7 @@ int romanToArabic(std::string s)
   return num;
 }
 
-
+//takes a string and returns true if the string is a valid arabic integer representation of a roman numeral, false otherwise
 bool validateNumber(std::string str)
 {
   int len = str.length();
@@ -124,7 +124,7 @@ bool validateNumber(std::string str)
   return isANumber;
 }
 
-
+//takes a string and returns true if the string is a valid roman numeral representation of an arabic integer, false otherwise
 bool validateString(std::string str)
 {
   int len = str.length();

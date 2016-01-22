@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
 #include <stdlib.h>
+#include "testCases.h"
 
-// takes an arabic integer and returns its roman numeral representation
+// takes a valid arabic integer and returns its roman numeral representation
 std::string arabicToRoman(int n)
 {
   std::string str = "";
@@ -11,34 +12,22 @@ std::string arabicToRoman(int n)
   std::string roman [13] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
   int arabic [13] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 
-  if (n < 1) //check that n is not zero or negative
+  while (n > 0)
   {
-    str = "No roman numeral representation of integers less than one exist.";
-  }
-  else if (n > 3999) //check that n is within the range of valid roman numerals
-  {
-    str = "No roman numeral representation of integers greater than 3,999 exist.";
-  }
-  else
-  {
-    while (n > 0)
+    if (n < arabic[index]) //if n is too small, try the next number in the array
     {
-      if (n < arabic[index]) //if n is too small, try the next number in the array
-      {
-	index++;
-      }
-      else //otherwise, subtract the largest possible value and concatenate str with its roman numerals 
-      {
-        str += roman[index];
-        n -= arabic[index];
-      }
+      index++;
     }
-  }
-  
+    else //otherwise, subtract the largest possible value and concatenate str with its roman numerals 
+    {
+      str += roman[index];
+      n -= arabic[index];
+    }
+  }  
   return str;
 }
 
-//takes a string of roman numerals and returns its arabic integer representation
+//takes a string of valid roman numerals and returns its arabic integer representation
 int romanToArabic(std::string s)
 {
   int num = 0, len = s.length();
@@ -94,86 +83,15 @@ int romanToArabic(std::string s)
 }
 
 
-void testCases()
-{
-  (arabicToRoman(0) == "No roman numeral representation of integers less than one exist." &&
-  arabicToRoman(-1) == "No roman numeral representation of integers less than one exist." &&
-  arabicToRoman(1) == "I" &&
-  arabicToRoman(4000) == "No roman numeral representation of integers greater than 3,999 exist." &&
-  arabicToRoman(2) == "II" &&
-  arabicToRoman(3) == "III" &&
-  arabicToRoman(4) == "IV" &&
-  arabicToRoman(5) == "V" &&
-  arabicToRoman(6) == "VI" &&
-  arabicToRoman(7) == "VII" &&
-  arabicToRoman(8) == "VIII" &&
-  arabicToRoman(9) == "IX" &&
-  arabicToRoman(10) == "X" &&
-  arabicToRoman(11) == "XI" &&
-  arabicToRoman(12) == "XII" &&
-  arabicToRoman(13) == "XIII" &&
-  arabicToRoman(90) == "XC" &&
-  arabicToRoman(100) == "C" &&
-  arabicToRoman(110) == "CX" &&
-  arabicToRoman(199) == "CXCIX" &&
-  arabicToRoman(200) == "CC" &&
-  arabicToRoman(999) == "CMXCIX" &&
-  arabicToRoman(1999) == "MCMXCIX" &&
-  arabicToRoman(2000) == "MM" &&
-  arabicToRoman(2001) == "MMI" &&
-  arabicToRoman(3999) == "MMMCMXCIX"
-  ) ? std::cout << "passed" : std::cout << "failed";
-  std::cout << std::endl;
-
- (romanToArabic("I") == 1 &&
-  romanToArabic("II") == 2 &&
-  romanToArabic("III") == 3 &&
-  romanToArabic("IV") == 4 &&
-  romanToArabic("V") == 5 &&
-  romanToArabic("VI") == 6 &&
-  romanToArabic("VII") == 7 &&
-  romanToArabic("VIII") == 8 &&
-  romanToArabic("IX") == 9 &&
-  romanToArabic("X") == 10 &&
-  romanToArabic("XI") == 11 &&
-  romanToArabic("XII") == 12 &&
-  romanToArabic("XIII") == 13 &&
-  romanToArabic("XC") == 90 &&
-  romanToArabic("C") == 100 &&
-  romanToArabic("CX") == 110 &&
-  romanToArabic("CXCIX") == 199 &&
-  romanToArabic("CC") == 200 &&
-  romanToArabic("CMXCIX") == 999 &&
-  romanToArabic("MCMXCIX") == 1999 &&
-  romanToArabic("MM") == 2000 &&
-  romanToArabic("MMI") == 2001 &&
-  romanToArabic("MMMCMXCIX") == 3999
-  ) ? std::cout << "passed" : std::cout << "failed";
-  std::cout << std::endl;
-
-  bool allTestsPassed = true;
-
-  for (int i = 1; i < 4000; i++)
-  {
-    if (romanToArabic(arabicToRoman(i)) != i)
-    {
-      allTestsPassed = false;
-    }
-  }
-
-  (allTestsPassed) ? std::cout << "Passed" << std::endl : std::cout << "Failed" << std::endl;
-}
-
-
 void validate(std::string str)
 {
   int len = str.length();
   bool isAString = true;
   bool isANumber = true;
 
-  if (len > 0)
+  if (len > 0)				 //check for empty string
   {
-    if (len < 5 && str[0] != 0) //check that the string is not too large an integer, nor has a leading zero
+    if (len < 5 && str[0] != 0)		 //check that the string is not too large an integer, nor has a leading zero
     {
       for (int i = 0; i < len; i++)
       {
@@ -190,24 +108,34 @@ void validate(std::string str)
 
     if (isANumber)
     {
-      std::cout << str << " is " << arabicToRoman(atoi(str.c_str())) << std::endl;
+      int n = atoi(str.c_str());
+
+      if (n < 1)	 //check that n is not zero or negative
+      {
+        str = "No roman numeral representation of integers less than one exists.";
+      }
+      else if (n > 3999) //check that n is within the range of valid roman numerals
+      {
+        str = "No roman numeral representation of integers greater than 3,999 exists.";
+      }
+      else
+      {
+        std::cout << str << " is " << arabicToRoman(n) << std::endl;
+      }
     }
-    else
+    else		 //in the case that we're given a string...
     {
       for (int i = 0; i < len; i++)
       {
         if (str[i] != 'I' && str[i] != 'V' && str[i] != 'X' && str[i] != 'L' && str[i] != 'C' && str[i] != 'D' && str[i] != 'M')
         {
-          isAString = false;
+          isAString = false; //check that the string only contains roman numerals
         }
       }
-
-      for (int i = 0; i < len-2; i++)
+      
+      if (str != arabicToRoman(romanToArabic(str)))
       {
-        if (str[i] == str[i+1] && str[i] == str[i+2]) //check that three occurences of one letter don't appear in a row
-        {
-          isAString = false;
-        }
+        isAString = false; //guarantees that the roman numerals are not improperly formatted
       }
 
       if (isAString)
@@ -216,7 +144,7 @@ void validate(std::string str)
       }
       else
       {
-        std::cout << "This input is not valid." << std::endl;
+        std::cout << "This input is not valid." << std::endl; //if it's not a number or roman numerals, input is invalid
       }
     }
   }

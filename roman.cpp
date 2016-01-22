@@ -158,24 +158,24 @@ int main()
 {
   std::string str;
 
-  std::cout << "Please enter an arabic number to convert to roman numerals, or vice-versa, or enter 0 to exit." << std::endl; 
+ // std::cout << "Please enter an arabic number to convert to roman numerals, or vice-versa, or enter 0 to exit." << std::endl; 
   std::cin >> str;
 
   while (str != "0")
   {
     if (validateNumber(str))
     {
-      std::cout << str << " is " << arabicToRoman(atoi(str.c_str())) << std::endl;
+      std::cout << arabicToRoman(atoi(str.c_str())) << std::endl;
     }
     else if (validateString(str))
     {
-      std::cout << str << " is " << romanToArabic(str) << std::endl;
+      std::cout << romanToArabic(str) << std::endl;
     }
     else
     {
       std::cout << "This input is not valid." << std::endl;  
     }
-    std::cout << "Please enter an arabic number to convert to roman numerals, or vice-versa, or enter 0 to exit." << std::endl;
+   // std::cout << "Please enter an arabic number to convert to roman numerals, or vice-versa, or enter 0 to exit." << std::endl;
     std::cin >> str;
   }
 

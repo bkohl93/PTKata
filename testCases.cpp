@@ -1,9 +1,11 @@
+#include <iostream>
+#include <vector>
+#include <stdlib.h>
+#include "testCases.h"
+
 void testCases()
 {
-  (arabicToRoman(0) == "No roman numeral representation of integers less than one exist." &&
-  arabicToRoman(-1) == "No roman numeral representation of integers less than one exist." &&
-  arabicToRoman(1) == "I" &&
-  arabicToRoman(4000) == "No roman numeral representation of integers greater than 3,999 exist." &&
+  (arabicToRoman(1) == "I" &&
   arabicToRoman(2) == "II" &&
   arabicToRoman(3) == "III" &&
   arabicToRoman(4) == "IV" &&

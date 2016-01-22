@@ -6,8 +6,8 @@ std::string arabicToRoman(int n)
   std::string str = "";
   int index = 0;
 
-  std::string roman [9] = {"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
-  int arabic [9] = {100, 90, 50, 40, 10, 9, 5, 4, 1};
+  std::string roman [13] = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
+  int arabic [13] = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
 
   if (n < 1) //check that n is not zero or negative
   {
@@ -64,7 +64,12 @@ int main()
   arabicToRoman(100) == "C" &&
   arabicToRoman(110) == "CX" &&
   arabicToRoman(199) == "CXCIX" &&
-  arabicToRoman(200) == "CC"
+  arabicToRoman(200) == "CC" && 
+  arabicToRoman(999) == "CMXCIX" &&
+  arabicToRoman(1999) == "MCMXCIX" &&
+  arabicToRoman(2000) == "MM" &&
+  arabicToRoman(2001) == "MMI" &&
+  arabicToRoman(3999) == "MMMCMXCIX"
   ) ? std::cout << "passed" : std::cout << "failed";
 
   std::cout << std::endl;

@@ -77,7 +77,7 @@ int romanToArabic(std::string s)
     }
   }
 
-  num += numbers[len-1];
+  num += numbers[len-1]; //we always add the last (possibly only) number in the array
 
   return num;
 }
